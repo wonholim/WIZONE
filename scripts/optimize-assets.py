@@ -10,6 +10,8 @@ for number in range(1, 5):
     subprocess.run(['cwebp', '-quiet', '-q', '82', '-resize', '1000', '0', str(media / f'{number}.png'), '-o', str(media / f'{number}.webp')], check=True)
 for name, width, crf in [('hero-desktop.mp4', 1280, 27), ('hero-mobile.mp4', 720, 29)]:
     subprocess.run([ffmpeg, '-y', '-i', str(media / 'top_video.mp4'), '-an', '-vf', f'scale={width}:-2,fps=24', '-c:v', 'libx264', '-preset', 'slow', '-crf', str(crf), '-pix_fmt', 'yuv420p', '-movflags', '+faststart', str(media / name)], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+# Small mobile rendition with a keyframe every second for fast startup.
+subprocess.run([ffmpeg, '-y', '-i', str(media / 'top_video.mp4'), '-an', '-vf', 'scale=480:-2,fps=24', '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-maxrate', '280k', '-bufsize', '280k', '-g', '24', '-keyint_min', '24', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', str(media / 'hero-mobile-fast.mp4')], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 subprocess.run([ffmpeg, '-y', '-ss', '0.2', '-i', str(media / 'top_video.mp4'), '-frames:v', '1', '-vf', 'scale=1280:-2', '-c:v', 'libwebp', '-quality', '80', str(media / 'hero-poster.webp')], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 # Retain every character in the pages and translations, plus Latin and punctuation.
 text = ''.join(p.read_text() for p in root.glob('*.html')) + (root / 'language.js').read_text()

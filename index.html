@@ -13,7 +13,7 @@
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
   <link rel="preload" href="assets/fonts/Pretendard-site.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css?v=20261115-footer-en">
-  <script defer src="script.js?v=20261115-lte"></script>
+  <script defer src="script.js?v=20261115-video-fast"></script>
   <script defer src="language.js?v=20261115-default-ko"></script>
   <script defer src="scroll-top.js?v=1"></script>
 </head>
@@ -28,6 +28,20 @@
   <section class="video-hero" id="home" aria-label="위즈원텍 브랜드 영상">
     <h1 class="visually-hidden">위즈원텍 디자인 하우스</h1>
     <video id="hero-video" muted loop playsinline preload="none" poster="assets/media/hero-poster.webp" aria-label="위즈원텍 브랜드 영상"></video>
+    <script>
+      // Start the hero request before deferred scripts, fonts and the map finish.
+      (() => {
+        const video = document.getElementById('hero-video');
+        const connection = navigator.connection;
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches || connection?.saveData || document.hidden) return;
+        const small = matchMedia('(max-width: 800px)').matches || ['slow-2g', '2g', '3g'].includes(connection?.effectiveType);
+        video.muted = true;
+        video.autoplay = true;
+        video.preload = 'auto';
+        video.src = small ? 'assets/media/hero-mobile-fast.mp4' : 'assets/media/hero-desktop.mp4';
+        video.play().catch(() => {});
+      })();
+    </script>
     <div class="hero-video-shade" aria-hidden="true"></div>
   </section>
 

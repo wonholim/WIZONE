@@ -41,16 +41,14 @@
   const video = document.querySelector('#hero-video');
   let userPaused = reduced.matches;
   const connection = navigator.connection;
-  let ready = document.readyState === 'complete';
-  window.addEventListener('load', () => {ready = true; syncVideo();}, {once:true});
   let inView = true;
   let playbackRequest = 0;
   async function syncVideo() {
     const request=++playbackRequest;
-    if(userPaused || !inView || document.hidden || !ready || connection?.saveData){video.pause();return;}
+    if(userPaused || !inView || document.hidden || connection?.saveData){video.pause();return;}
     if (!video.getAttribute('src')) {
       const small = mobile.matches || ['slow-2g', '2g', '3g'].includes(connection?.effectiveType);
-      video.src = small ? 'assets/media/hero-mobile.mp4' : 'assets/media/hero-desktop.mp4';
+      video.src = small ? 'assets/media/hero-mobile-fast.mp4' : 'assets/media/hero-desktop.mp4';
     }
     try { await video.play();if(request!==playbackRequest && (userPaused||!inView||document.hidden))video.pause(); } catch { /* Browser may require the play button. */ }
   }
