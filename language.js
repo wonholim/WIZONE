@@ -106,7 +106,7 @@
     window.ScrollTrigger?.refresh();
   };
   document.querySelectorAll('[data-language]').forEach(button=>button.addEventListener('click',()=>setLanguage(button.dataset.language)));
-  let initial='en';try{const saved=localStorage.getItem('wizone-language');if(saved==='ko'||saved==='en')initial=saved;}catch{}
+  let initial='ko';try{const saved=localStorage.getItem('wizone-language');if(saved==='ko'||saved==='en')initial=saved;}catch{}
   setLanguage(initial);
-  window.addEventListener('storage',e=>{if(e.key==='wizone-language')setLanguage(e.newValue==='ko'?'ko':'en');});
+  window.addEventListener('storage',e=>{if(e.key==='wizone-language')setLanguage(e.newValue==='en'?'en':'ko');});
 })();
