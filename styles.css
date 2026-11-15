@@ -347,8 +347,8 @@ input,textarea,[contenteditable=""],[contenteditable="true"] {-webkit-user-selec
 html[lang="en"] .company-intro h2 {font-size:clamp(29px,3vw,46px);letter-spacing:-1px;}
 html[lang="en"] .intro-description-row .intro-description {font-size:clamp(17px,1.6vw,22px);}
 html[lang="en"] .contact-title-link h2 {font-size:clamp(34px,4vw,65px);letter-spacing:-1.5px;}
-html[lang="en"] .footer-info>div {grid-template-columns:100px minmax(0,1fr);}
-@media(max-width:800px){.language-switch {margin:8px 0 0;align-self:flex-start;}.language-switch button {padding:10px 8px;}html[lang="en"] .footer-info>div {grid-template-columns:70px minmax(0,1fr);}}
+html[lang="en"] .footer-info>div {grid-template-columns:132px minmax(0,1fr);}
+@media(max-width:800px){.language-switch {margin:8px 0 0;align-self:flex-start;}.language-switch button {padding:10px 8px;}html[lang="en"] .footer-info>div {grid-template-columns:120px minmax(0,1fr);}}
 
 /* Clip the complete photo once to avoid overlapping antialiased edges. */
 .expertise-card-link {border-radius:22px;overflow:hidden;clip-path:inset(0 round 22px);}
@@ -550,3 +550,6 @@ html[lang="en"] .footer-info>div {grid-template-columns:100px minmax(0,1fr);}
 .scroll-top:hover {background:#73797c;transform:translateY(-3px);}
 .scroll-top:focus-visible {outline:2px solid #167481;outline-offset:4px;}
 @media(max-width:800px){.scroll-top {right:26px;bottom:36px;width:48px;height:48px;}}
+
+.footer-info dt,.footer-info dd {min-width:0;}
+.footer-info dt {overflow-wrap:anywhere;}
