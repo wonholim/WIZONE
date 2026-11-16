@@ -428,7 +428,8 @@ html[lang="en"] .footer-info>div {grid-template-columns:132px minmax(0,1fr);}
 /* Matching outlined actions for the company introduction and recruitment. */
 .intro-actions {display:flex;justify-content:center;flex-wrap:wrap;gap:12px;}
 .company-page-button,.careers-link {display:inline-flex;align-items:center;justify-content:center;min-width:154px;min-height:56px;padding:15px 28px;border:1px solid #c7c7c7;border-radius:999px;background:transparent;color:#333;font-size:15px;font-weight:600;line-height:1.5;transition:background .25s,color .25s,border-color .25s;}
-.company-page-button:hover,.company-page-button:focus-visible {background:#292929;color:#fff;border-color:#292929;}
+.company-page-button:focus-visible {background:#292929;color:#fff;border-color:#292929;}
+@media(hover:hover) and (pointer:fine){.company-page-button:hover {background:#292929;color:#fff;border-color:#292929;}}
 .location-contacts {display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:22px;font-size:14px;line-height:1.8;color:var(--muted);}
 .location-contacts a:hover {text-decoration:underline;}
 .greeting-page main {padding-top:var(--header);}
@@ -553,3 +554,5 @@ html[lang="en"] .footer-info>div {grid-template-columns:132px minmax(0,1fr);}
 
 .footer-info dt,.footer-info dd {min-width:0;}
 .footer-info dt {overflow-wrap:anywhere;}
+
+.company-page-button {touch-action:manipulation;}

@@ -10,3 +10,23 @@
   matchMedia('(max-width:800px)').addEventListener('change',close);
   document.querySelector('#year').textContent=new Date().getFullYear();
 })();
+
+// Activate return links on the first touch; ignore swipes and multi-touch.
+document.querySelectorAll('.greeting-return a, .history-return a').forEach(link => {
+  let start = null;
+  link.addEventListener('touchstart', event => {
+    const touch = event.touches[0];
+    start = event.touches.length === 1 ? {x:touch.clientX, y:touch.clientY} : null;
+  }, {passive:true});
+  link.addEventListener('touchmove', event => {
+    const touch = event.touches[0];
+    if (start && (event.touches.length !== 1 || Math.hypot(touch.clientX-start.x,touch.clientY-start.y)>10)) start=null;
+  }, {passive:true});
+  link.addEventListener('touchcancel', () => {start=null;}, {passive:true});
+  link.addEventListener('touchend', event => {
+    if (!start || event.touches.length) return;
+    start=null;
+    event.preventDefault();
+    window.location.assign(link.href);
+  }, {passive:false});
+});
